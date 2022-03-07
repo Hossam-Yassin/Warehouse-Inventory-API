@@ -20,9 +20,10 @@ exports.insertProducts = async function (docs) {
       docs[index]._id=docs[index].id;
     }
 
-    const result = await products.insertMany( docs, options);
+    products.insertMany( docs, options).catch(err=>{console.error(err);});
+    
   } finally {
-    await client.close();
+    // client.close();
   }
 }
 
@@ -41,11 +42,10 @@ exports.insertInventoryStock = async function (docs) {
       docs[index]._id=docs[index].art_id;
       //docs[index].stock=Number.parseInt(docs[index].stock);
     }
-    const result = await inventory.insertMany(docs, options);
+    inventory.insertMany(docs, options).catch(err=>{console.error(err);});
 
-    console.log(`${result.insertedCount} products were inserted into the warehouse`);
   } finally {
-    await client.close();
+    //client.close();
   }
 }
 
