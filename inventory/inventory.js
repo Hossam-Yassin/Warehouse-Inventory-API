@@ -11,11 +11,9 @@ exports.checkStockAvailability = async function (productID){
   if (isNaN(productID)){
     console.error('Incorrect ProductID , please check the product ID  ');
   }else{
-    await dataAccess.checkStockAvailability(productID).then(
-      (data) => {
-        return data;
-      }
-    );
+    let stocks = await dataAccess.checkStockAvailability(productID);
+    console.log("==========" + stocks);
+    return stocks; 
   }
 };
 
@@ -23,12 +21,12 @@ exports.checkStockAvailability = async function (productID){
 /**
  * this method will deduct the quantity of the product from our system
  */
-exports.purchaseProduct = async function (productID , qty){
+exports.purchaseProduct =  function (productID , qty){
   console.log('purchaseProduct has been Called ');
   if (isNaN(qty)){
     console.error('Incorrect quantity , use only number to be able to proceed ');
   }else{
-    let isPurchased = await dataAccess.purchaseProduct(productID,qty);
+    let isPurchased = dataAccess.purchaseProduct(productID,qty);
     return isPurchased;
   }
 };

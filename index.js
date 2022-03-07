@@ -19,12 +19,12 @@ app.use(cors({
   origin: '*'
 }));
 
-
 app.get(STOCK_AVAILABILITY_END_POINT, (req, res) => {
-  
   const productID = req.params.productID ;
-  inventory.checkStockAvailability(productID);
-  res.send('feeding products into our MongoDB system ');
+  inventory.checkStockAvailability(productID).then( (data) => {
+    res.json({'stocks':Math.floor(data)});
+  }) ;
+  
 });
 
 app.get(FEED_IN_PRODUCS_END_POINT, (req, res) => {
