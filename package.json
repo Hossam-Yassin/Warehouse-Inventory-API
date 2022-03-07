@@ -1,0 +1,29 @@
+{
+  "name": "warehouse-inventory-api",
+  "version": "1.0.0",
+  "description": "warehouse APIs that manage products catalog and stocks",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hossam-Yassin/Warehouse-Inventory-API.git"
+  },
+  "keywords": [
+    "Warehouse",
+    "Inventory",
+    "API"
+  ],
+  "author": "Hossam Yassin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hossam-Yassin/Warehouse-Inventory-API/issues"
+  },
+  "homepage": "https://github.com/Hossam-Yassin/Warehouse-Inventory-API#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "mongo": "^0.1.0"
+  }
+}

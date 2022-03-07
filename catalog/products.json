@@ -1,0 +1,270 @@
+{
+  "products": [
+    {
+      
+      "id" : "1" , 
+      "name": "AGAM Junior chair",
+      "src" :"https://www.ikea.com/eg/en/images/products/agam-junior-chair-black__0727930_pe735946_s5.jpg",
+      "contain_articles": [
+        {
+          "art_id": "1",
+          "amount_of": "1"
+        }
+      ]
+    },
+    {
+      "id" : "2" , 
+      "name": "ÄPPLARYD 2-seat sofa",
+      "src" :"https://www.ikea.com/eg/en/images/products/aepplaryd-2-seat-sofa-lejde-grey-black__0992862_pe820289_s5.jpg",
+      "contain_articles": [
+        {
+          "art_id": "1",
+          "amount_of": "2"
+        },
+        {
+          "art_id": "2",
+          "amount_of": "2"
+        }
+      ]
+    },
+    {
+      "id" : "3" , 
+      "name": "TROTTEN Table top",
+      "src" :"https://www.ikea.com/eg/en/images/products/skarsta-trotten-desk-sit-stand-beige-white__0777621_pe758664_s5.jpg",
+      "contain_articles": [
+        {
+          "art_id": "1",
+          "amount_of": "4"
+        },
+        {
+          "art_id": "2",
+          "amount_of": "8"
+        },
+        {
+          "art_id": "4",
+          "amount_of": "1"
+        }
+      ]
+    },
+    {
+      "id" : "4" , 
+      "name": "NORDEN Extendable table",
+      "src" :"https://www.ikea.com/eg/en/images/products/norden-gateleg-table-birch__66396_pe179294_s5.jpg",
+      "contain_articles": [
+        {
+          "art_id": "1",
+          "amount_of": "4"
+        },
+        {
+          "art_id": "2",
+          "amount_of": "8"
+        },
+        {
+          "art_id": "4",
+          "amount_of": "1"
+        }
+      ]
+    },
+    {
+      "id" : "5" , 
+      "name": "ODGER Chair",
+      "src" :"https://www.ikea.com/eg/en/images/products/odger-chair-red__1038449_pe839684_s5.jpg",
+      "contain_articles": [
+        {
+          "art_id": "1",
+          "amount_of": "4"
+        },
+        {
+          "art_id": "2",
+          "amount_of": "8"
+        },
+        {
+          "art_id": "4",
+          "amount_of": "1"
+        }
+      ]
+    },
+    {
+      "id" : "6" , 
+      "name": "OLIVBLAD Plant stand",
+      "src" :"https://www.ikea.com/eg/en/images/products/olivblad-plant-stand-in-outdoor-black__1010781_pe828330_s5.jpg",
+      "contain_articles": [
+        {
+          "art_id": "1",
+          "amount_of": "4"
+        },
+        {
+          "art_id": "2",
+          "amount_of": "8"
+        },
+        {
+          "art_id": "4",
+          "amount_of": "1"
+        }
+      ]
+    },
+    {
+      "id" : "7" , 
+      "name": "BESTÅ Storage",
+      "src" :"https://www.ikea.com/eg/en/images/products/besta-storage-combination-with-doors-black-brown-kallviken-dark-grey-concrete-effect__0780527_pe760108_s5.jpg",
+      "contain_articles": [
+        {
+          "art_id": "1",
+          "amount_of": "4"
+        },
+        {
+          "art_id": "2",
+          "amount_of": "8"
+        },
+        {
+          "art_id": "4",
+          "amount_of": "1"
+        }
+      ]
+    },
+    {
+      "id" : "8" , 
+      "name": "VARDAGEN Glass",
+      "src" :"https://www.ikea.com/eg/en/images/products/vardagen-carafe-with-lid-clear-glass__0711270_pe728108_s5.jpg",
+      "contain_articles": [
+        {
+          "art_id": "1",
+          "amount_of": "20"
+        }
+      ]
+    },
+    {
+      
+      "id" : "9" , 
+      "name": "AGAM Junior chair",
+      "src" :"https://www.ikea.com/eg/en/images/products/agam-junior-chair-black__0727930_pe735946_s5.jpg",
+      "contain_articles": [
+        {
+          "art_id": "1",
+          "amount_of": "1"
+        }
+      ]
+    },
+    {
+      "id" : "10" , 
+      "name": "ÄPPLARYD 2-seat sofa",
+      "src" :"https://www.ikea.com/eg/en/images/products/aepplaryd-2-seat-sofa-lejde-grey-black__0992862_pe820289_s5.jpg",
+      "contain_articles": [
+        {
+          "art_id": "1",
+          "amount_of": "2"
+        },
+        {
+          "art_id": "2",
+          "amount_of": "2"
+        }
+      ]
+    },
+    {
+      "id" : "11" , 
+      "name": "TROTTEN Table top",
+      "src" :"https://www.ikea.com/eg/en/images/products/skarsta-trotten-desk-sit-stand-beige-white__0777621_pe758664_s5.jpg",
+      "contain_articles": [
+        {
+          "art_id": "1",
+          "amount_of": "4"
+        },
+        {
+          "art_id": "2",
+          "amount_of": "8"
+        },
+        {
+          "art_id": "4",
+          "amount_of": "1"
+        }
+      ]
+    },
+    {
+      "id" : "12" , 
+      "name": "NORDEN Extendable table",
+      "src" :"https://www.ikea.com/eg/en/images/products/norden-gateleg-table-birch__66396_pe179294_s5.jpg",
+      "contain_articles": [
+        {
+          "art_id": "1",
+          "amount_of": "4"
+        },
+        {
+          "art_id": "2",
+          "amount_of": "8"
+        },
+        {
+          "art_id": "4",
+          "amount_of": "1"
+        }
+      ]
+    },
+    {
+      "id" : "13" , 
+      "name": "ODGER Chair",
+      "src" :"https://www.ikea.com/eg/en/images/products/odger-chair-red__1038449_pe839684_s5.jpg",
+      "contain_articles": [
+        {
+          "art_id": "1",
+          "amount_of": "4"
+        },
+        {
+          "art_id": "2",
+          "amount_of": "8"
+        },
+        {
+          "art_id": "4",
+          "amount_of": "1"
+        }
+      ]
+    },
+    {
+      "id" : "14" , 
+      "name": "OLIVBLAD Plant stand",
+      "src" :"https://www.ikea.com/eg/en/images/products/olivblad-plant-stand-in-outdoor-black__1010781_pe828330_s5.jpg",
+      "contain_articles": [
+        {
+          "art_id": "1",
+          "amount_of": "4"
+        },
+        {
+          "art_id": "2",
+          "amount_of": "8"
+        },
+        {
+          "art_id": "4",
+          "amount_of": "1"
+        }
+      ]
+    },
+    {
+      "id" : "15" , 
+      "name": "BESTÅ Storage ",
+      "src" :"https://www.ikea.com/eg/en/images/products/besta-storage-combination-with-doors-black-brown-kallviken-dark-grey-concrete-effect__0780527_pe760108_s5.jpg",
+      "contain_articles": [
+        {
+          "art_id": "1",
+          "amount_of": "4"
+        },
+        {
+          "art_id": "2",
+          "amount_of": "8"
+        },
+        {
+          "art_id": "4",
+          "amount_of": "1"
+        }
+      ]
+    },
+    {
+      "id" : "16" , 
+      "name": "VARDAGEN Glass",
+      "src" :"https://www.ikea.com/eg/en/images/products/vardagen-carafe-with-lid-clear-glass__0711270_pe728108_s5.jpg",
+      "contain_articles": [
+        {
+          "art_id": "1",
+          "amount_of": "20"
+        }
+      ]
+    }
+  ]
+}
