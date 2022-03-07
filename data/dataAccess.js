@@ -1,6 +1,5 @@
 const {MongoClient} = require('mongodb');
 
-//const url = "mongodb://localhost:30001/";
 const url = "mongodb://127.0.0.1:27017";
 const client = new MongoClient(url);
 
@@ -63,7 +62,7 @@ exports.getProductDetails = async function (productID){
     return productDetailsDoc;
 
   } finally {
-    await client.close();
+    //await client.close();
   }
 };
 
@@ -107,18 +106,52 @@ exports.purchaseProduct = async function (productID , qty){
           }
       }
     }
-    console.log("DataAccess : Stock Availability :  " + inStock);
-
+    
     //This need to be made in transaction 
     if(inStock === true){
       for (index in productDetails.contain_articles) { 
          await StockStore.updateOne({_id : productDetails.contain_articles[index].art_id} , 
           { $inc: { stock: -1 * Number.parseInt(qty)* Number.parseInt(productDetails.contain_articles[index].amount_of) } } );
       }
-    }else{
-      console.info("out of stock case " );
-      return false ;
     }
+
+    console.log("DataAccess : Stock Availability :  " + inStock);
+    return inStock ;
+    
+  } finally {
+     //await client.close();
+  }
+};
+
+/**
+ * This method will return the available stock of the product
+ */
+exports.checkStockAvailability = async function (productID){
+  
+  try {
+    
+    await client.connect();
+    const database = client.db("WareHouse");
+    const products = database.collection("Products");
+
+    let productDetails = await products.findOne({_id : productID});
+
+    const StockStore = database.collection("Stock");
+    let productAvailableStocks =1000000000 ; // imaginal number
+
+    //Retrieve all composed article in the purchased product
+    for (index in productDetails.contain_articles ) { 
+      let articleStock = await StockStore.findOne({_id : productDetails.contain_articles[index].art_id});
+      if(articleStock !== null){
+        let articleAvailableStocks = Number.parseInt(articleStock.stock) / Number.parseInt(productDetails.contain_articles[index].amount_of) ;
+        if(articleAvailableStocks < productAvailableStocks){
+           productAvailableStocks = articleAvailableStocks;
+        }
+      }
+    }
+
+    console.log("DataAccess : Stock Availability :  " + productAvailableStocks);
+    return productAvailableStocks;
 
   } finally {
      await client.close();

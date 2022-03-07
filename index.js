@@ -5,24 +5,35 @@ const cors = require('cors');
 const express = require('express')
 const app = express();
 
-const PRODUCT_DETAIL_END_POINT= "/products/detail/:productID/" ;
-const PRODUCTS_LIST_END_POINT= "/products/:pageNumber/" ;
-const PURCHASE_PRODUCT_END_POINT= "/purchase/product/" ;
+const PRODUCT_DETAIL_END_POINT= "/api/products/detail/:productID/" ;
+const PRODUCTS_LIST_END_POINT= "/api/products/:pageNumber/" ;
 
-const FEEDING_IN_PRODUCS_END_POINT= "/products/load/" ;
-const FEEDING_IN_STOCK_END_POINT= "/inventory/load/" ;
+const PURCHASE_PRODUCT_END_POINT= "/api/product/purchase/" ;
+const STOCK_AVAILABILITY_END_POINT= "/api/stock/availability/:productID/" ;
+
+const FEED_IN_PRODUCS_END_POINT= "/api/products/feed/" ;
+const FEED_IN_STOCK_END_POINT= "/api/stock/feed/" ;
 
 app.use(express.json());
 app.use(cors({
   origin: '*'
 }));
 
-app.get(FEEDING_IN_PRODUCS_END_POINT, (req, res) => {
-  products.loadProducts();
+
+app.get(STOCK_AVAILABILITY_END_POINT, (req, res) => {
+  
+  const productID = req.params.productID ;
+  inventory.checkStockAvailability(productID);
   res.send('feeding products into our MongoDB system ');
 });
 
-app.get(FEEDING_IN_STOCK_END_POINT, (req, res) => {
+app.get(FEED_IN_PRODUCS_END_POINT, (req, res) => {
+  let availableStock = products.loadProducts();
+  console.log(availableStock);
+  res.send('feeding products into our MongoDB system ');
+});
+
+app.get(FEED_IN_STOCK_END_POINT, (req, res) => {
   inventory.loadInventory();
   res.send('feeding stocks into our MongoDB system ');
 });

@@ -19,11 +19,11 @@
       "contain_articles": [
         {
           "art_id": "1",
-          "amount_of": "2"
+          "amount_of": "100"
         },
         {
           "art_id": "2",
-          "amount_of": "2"
+          "amount_of": "100"
         }
       ]
     },
@@ -34,15 +34,15 @@
       "contain_articles": [
         {
           "art_id": "1",
-          "amount_of": "4"
+          "amount_of": "50"
         },
         {
           "art_id": "2",
-          "amount_of": "8"
+          "amount_of": "50"
         },
         {
           "art_id": "4",
-          "amount_of": "1"
+          "amount_of": "50"
         }
       ]
     },
