@@ -20,10 +20,13 @@ exports.insertProducts = async function (docs) {
       docs[index]._id=docs[index].id;
     }
 
-    products.insertMany( docs, options).catch(err=>{console.error(err);});
+    await products.insertMany( docs, options);
     
-  } finally {
-   
+  }catch(err){
+    console.error(err);
+  }
+  finally {
+    client.close();
   }
 }
 
@@ -48,12 +51,14 @@ exports.insertInventoryStock = async function (docs) {
     //Setting ID field to the docmuent , MongoDB related field
     for(index in docs){
       docs[index]._id=docs[index].art_id;
-      //docs[index].stock=Number.parseInt(docs[index].stock);
     }
-    inventory.insertMany(docs, options).catch(err=>{console.error(err);});
+    await inventory.insertMany(docs, options);
 
-  } finally {
-    
+  }catch(err){
+    console.error(err);
+  }
+  finally {
+    client.close();
   }
 }
 
@@ -69,7 +74,9 @@ exports.getProductDetails = async function (productID){
     }
     return productDetailsDoc;
 
-  } finally {
+  } catch(err){
+    console.error(err);
+  }finally {
     client.close();
   }
 };
@@ -86,7 +93,9 @@ exports.getAllProducts = async function (pageNumber){
 
     return result;
     
-  } finally {
+  } catch(err){
+    console.error(err);
+  }finally {
      await client.close();
   }
 };
@@ -126,7 +135,9 @@ exports.purchaseProduct = async function (productID , qty){
     console.log("DataAccess : Stock Availability :  " + inStock);
     return inStock ;
     
-  } finally {
+  } catch(err){
+    console.error(err);
+  }finally {
     client.close();
   }
 };
@@ -162,7 +173,9 @@ exports.checkStockAvailability = async function (productID){
     console.log("DataAccess : Stock Availability :  " + productAvailableStocks);
     return productAvailableStocks;
 
-  } finally {
+  } catch(err){
+    console.error(err);
+  }finally {
      await client.close();
   }
 };
