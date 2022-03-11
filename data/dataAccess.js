@@ -4,6 +4,7 @@ const url = "mongodb://127.0.0.1:27017";
 const client = new MongoClient(url);
 
 const ProductsPerPage = 5;
+const outOfRangeStockValue = 10000000000 ; // This is imaginal number that not practical to have as stocks for any product
 
 exports.insertProducts = async function (docs) {
   
@@ -149,7 +150,6 @@ exports.purchaseProduct = async function (productID , qty){
 exports.checkStockAvailability = async function (productID){
   
   try {
-    
     await client.connect();
     const database = client.db("WareHouse");
     const products = database.collection("Products");
@@ -157,15 +157,22 @@ exports.checkStockAvailability = async function (productID){
     let productDetails = await products.findOne({_id : productID});
 
     const StockStore = database.collection("Stock");
-    let productAvailableStocks =0 ; // by default , it is out of stock
+    let productAvailableStocks =outOfRangeStockValue ; 
 
     //Retrieve all composed article in the purchased product
     for (index in productDetails.contain_articles ) { 
       let articleStock = await StockStore.findOne({_id : productDetails.contain_articles[index].art_id});
       if(articleStock !== null){
         let articleAvailableStocks = Number.parseInt(articleStock.stock) / Number.parseInt(productDetails.contain_articles[index].amount_of) ;
-        if(articleAvailableStocks >= 1){ 
-           productAvailableStocks = articleAvailableStocks;
+        if(articleAvailableStocks >= 1){
+            //assign the least stock available in the contained articles in the product
+            if (articleAvailableStocks < productAvailableStocks) { //This condition will always run for the first iteration
+              productAvailableStocks = articleAvailableStocks;
+            }  
+        }else{
+          //end the loop and return out of stock value 
+          console.log("DataAccess : one of the included articles is out of stock " );
+          return 0;
         }
       }
     }
@@ -175,6 +182,8 @@ exports.checkStockAvailability = async function (productID){
 
   } catch(err){
     console.error(err);
+    productAvailableStocks = 0;
+    return productAvailableStocks;
   }finally {
      await client.close();
   }
