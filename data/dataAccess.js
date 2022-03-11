@@ -23,10 +23,18 @@ exports.insertProducts = async function (docs) {
     products.insertMany( docs, options).catch(err=>{console.error(err);});
     
   } finally {
-    // client.close();
+   
   }
 }
 
+/**
+ * This method is feeding the DB with the stock availability of the articles in the warehouse , 
+ * It is reading json file and insert it to the DB. 
+ * 
+ * //TODO : This method should increment the stocks in the DB not replacing as it is implemented now so 
+ * initially , we can fire a batch/bulk of transaction for each article by incrementing the stock with 
+ * the value in the json file.
+ */
 exports.insertInventoryStock = async function (docs) {
   
   try {
@@ -45,7 +53,7 @@ exports.insertInventoryStock = async function (docs) {
     inventory.insertMany(docs, options).catch(err=>{console.error(err);});
 
   } finally {
-    //client.close();
+    
   }
 }
 
@@ -57,24 +65,24 @@ exports.getProductDetails = async function (productID){
 
     const productDetailsDoc = await products.findOne({_id : productID});
     if(productDetailsDoc !== null ){
-      console.log( 'Product Name is : ${productDetailsDoc.name} and ID : ' + productDetailsDoc.name );
+      console.log( 'DataAccess : Product Name is : ${productDetailsDoc.name} and ID : ' + productDetailsDoc.name );
     }
     return productDetailsDoc;
 
   } finally {
-    //await client.close();
+    client.close();
   }
 };
 
 exports.getAllProducts = async function (pageNumber){
-  console.log(`getAllProducts method has been called with PageNumber : ` + pageNumber);
+  console.log(`DataAccess : getAllProducts method has been called with PageNumber : ` + pageNumber);
   try {
     await client.connect();
     const database = client.db("WareHouse");
     const products = database.collection("Products");
 
     const result = await products.find({}).skip(ProductsPerPage*(pageNumber-1)).limit(ProductsPerPage).toArray(); 
-    console.log( 'Product list is : ' + JSON.stringify(result) );
+    console.log( 'DataAccess : Product list is : ' + JSON.stringify(result) );
 
     return result;
     
@@ -119,12 +127,13 @@ exports.purchaseProduct = async function (productID , qty){
     return inStock ;
     
   } finally {
-     //await client.close();
+    client.close();
   }
 };
 
 /**
- * This method will return the available stock of the product
+ * This method will return a json object with the available 
+ * stock of the quered product.
  */
 exports.checkStockAvailability = async function (productID){
   
@@ -137,14 +146,14 @@ exports.checkStockAvailability = async function (productID){
     let productDetails = await products.findOne({_id : productID});
 
     const StockStore = database.collection("Stock");
-    let productAvailableStocks =1000000000 ; // imaginal number
+    let productAvailableStocks =0 ; // by default , it is out of stock
 
     //Retrieve all composed article in the purchased product
     for (index in productDetails.contain_articles ) { 
       let articleStock = await StockStore.findOne({_id : productDetails.contain_articles[index].art_id});
       if(articleStock !== null){
         let articleAvailableStocks = Number.parseInt(articleStock.stock) / Number.parseInt(productDetails.contain_articles[index].amount_of) ;
-        if(articleAvailableStocks < productAvailableStocks){
+        if(articleAvailableStocks >= 1){ 
            productAvailableStocks = articleAvailableStocks;
         }
       }
@@ -158,6 +167,13 @@ exports.checkStockAvailability = async function (productID){
   }
 };
 
+/* 
+  This is a function that require MongoDB to be
+working in replica mode so transaction management is 
+handled properly .
+
+//TODO : not tested yet so do not use. 
+**/
 exports.purchaseProductXYZ = async function (productID , qty){
   
   await client.connect();
@@ -178,12 +194,10 @@ exports.purchaseProductXYZ = async function (productID , qty){
       const productsCatalog = client.db("WareHouse").collection("Products");
       const InventoryStocks = client.db("WareHouse").collection("Stocks");
 
-
       // Important:: You must pass the session to the operations
       await productsCatalog.insertOne({ abc: 1 }, { session });
       await InventoryStocks.insertOne({ xyz: 999 }, { session });
       
-
     }, transactionOptions);
   } finally {
     await session.endSession();
